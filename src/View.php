@@ -8,19 +8,17 @@ use InvalidArgumentException;
 class View
 {
     /**
-     * The view extentions.
+     * The view extensions.
      */
     const VIEW_EXT = [
 
-        '.view.js',
-        '.view.css',
         '.view.php',
         '.view.html'
 
     ];
 
     /**
-     * The compiled view extention.
+     * The compiled view extension.
      */
     const COMPILED_VIEW_EXT = '.compiled.php';
 
