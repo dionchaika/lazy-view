@@ -2,6 +2,8 @@
 
 namespace Lazy\View;
 
+use Throwable;
+
 class View
 {
     /**
@@ -86,6 +88,33 @@ class View
      */
     public function render(string $name, array $params = []): string
     {
-        
+        $path = $this->getPath($name);
+
+        $obLevel = ob_get_level();
+        ob_start();
+
+        extract($params, \EXTR_SKIP);
+
+        try {
+            require $path;
+        } catch (Throwable $e) {
+            while (ob_get_level() > $obLevel) {
+                ob_end_clean();
+                throw $e;
+            }
+        }
+
+        return ob_get_clean();
+    }
+
+    /**
+     * Get a view path.
+     *
+     * @param string $name
+     * @return string
+     */
+    protected function getPath(string $name): string
+    {
+
     }
 }
