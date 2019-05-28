@@ -160,8 +160,8 @@ class View
 
         ob_start();
 
-        extract($this->params);
-        extract($params, \EXTR_OVERWRITE);
+        extract($params);
+        extract($this->params, \EXTR_SKIP);
 
         try {
             include $path;
