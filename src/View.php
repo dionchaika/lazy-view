@@ -127,7 +127,6 @@ class View
      * @param string  $name
      * @param mixed[] $params
      * @return string
-     * @throws \InvalidArgumentException
      */
     public function render(string $name, array $params = []): string
     {
