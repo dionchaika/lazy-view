@@ -3,32 +3,9 @@
 namespace Lazy\View;
 
 use Throwable;
-use InvalidArgumentException;
 
 class View
 {
-    /**
-     * The view extensions.
-     */
-    const VIEW_EXT = [
-
-        '.view.php',
-        '.view.html'
-
-    ];
-
-    /**
-     * The compiled view extension.
-     */
-    const COMPILED_VIEW_EXT = '.compiled.php';
-
-    /**
-     * Enable compiled views cache.
-     *
-     * @var bool
-     */
-    public $enableCache = true;
-
     /**
      * The views root directory.
      *
@@ -52,10 +29,19 @@ class View
     protected $params = [];
 
     /**
-     * @param string      $dir
-     * @param string|null $compiledDir
+     * The views compiler.
+     *
+     * @var \Lazy\View\CompilerInterface
      */
-    public function __construct(string $dir, ?string $compiledDir = null)
+    protected $compiler;
+
+    /**
+     * @param string                            $dir
+     * @param string|null                       $compiledDir
+     * @param mixed[]                           $params
+     * @param \Lazy\View\CompilerInterface|null $compiler
+     */
+    public function __construct(string $dir, ?string $compiledDir = null, array $params = [], ?CompilerInterface $compiler = null)
     {
         $this->dir = rtrim($dir, \DIRECTORY_SEPARATOR);
 
@@ -64,6 +50,9 @@ class View
         } else {
             $this->compiledDir = rtrim($compiledDir, \DIRECTORY_SEPARATOR);
         }
+
+        $this->params = $params;
+        $this->compiler = $compiler ?? new BaseCompiller;
     }
 
     /**
