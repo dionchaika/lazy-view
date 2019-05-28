@@ -195,7 +195,8 @@ class View
     }
 
     /**
-     * Evaluate path.
+     * Evaluate a path
+     * and return a result.
      *
      * @param string  $path
      * @param mixed[] $params
