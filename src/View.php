@@ -3,6 +3,7 @@
 namespace Lazy\View;
 
 use Throwable;
+use InvalidArgumentException;
 
 class View
 {
@@ -139,6 +140,7 @@ class View
      * @param string  $name
      * @param mixed[] $params
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function render(string $name, array $params = []): string
     {
@@ -168,9 +170,37 @@ class View
      *
      * @param string $name
      * @return string
+     * @throws \InvalidArgumentException
      */
     protected function getPath(string $name): string
     {
+        $name = str_replace('.', \DIRECTORY_SEPARATOR, $name);
 
+        if ($this->enableCache) {
+            $compiledPath = $this->compiledDir
+                .\DIRECTORY_SEPARATOR
+                .$name
+                .self::COMPILED_VIEW_EXT;
+
+            if (file_exists($compiledPath)) {
+                return $compiledPath;
+            }
+        }
+
+        $paths = glob($this->dir.\DIRECTORY_SEPARATOR.$name.'.*');
+        if (empty($paths)) {
+            throw new InvalidArgumentException(
+                'View not found: '.$name.'!'
+            );
+        }
+
+        $path = array_shift($paths);
+
+        $ext = substr($path, strpos($path, '.'));
+        if (in_array($ext, self::VIEW_EXT) && $this->enableCache) {
+            
+        }
+
+        return $path;
     }
 }
