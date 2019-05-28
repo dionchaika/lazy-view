@@ -52,7 +52,7 @@ class View
         }
 
         $this->params = $params;
-        $this->compiler = $compiler ?? new BaseCompiller;
+        $this->compiler = $compiler ?? new Compiller;
     }
 
     /**
