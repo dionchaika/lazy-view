@@ -144,7 +144,11 @@ class View
      */
     public function render(string $name, array $params = []): string
     {
-        
+        //
+        // Getting a view path...
+        //
+
+        return $this->evaluate($path, array_merge($params, $this->params));
     }
 
     /**
@@ -160,8 +164,7 @@ class View
 
         ob_start();
 
-        extract($params);
-        extract($this->params, \EXTR_SKIP);
+        extract($params, \EXTR_SKIP);
 
         try {
             include $path;
