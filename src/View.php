@@ -176,31 +176,6 @@ class View
     {
         $name = str_replace('.', \DIRECTORY_SEPARATOR, $name);
 
-        if ($this->enableCache) {
-            $compiledPath = $this->compiledDir
-                .\DIRECTORY_SEPARATOR
-                .$name
-                .self::COMPILED_VIEW_EXT;
-
-            if (file_exists($compiledPath)) {
-                return $compiledPath;
-            }
-        }
-
-        $paths = glob($this->dir.\DIRECTORY_SEPARATOR.$name.'.*');
-        if (empty($paths)) {
-            throw new InvalidArgumentException(
-                'View not found: '.$name.'!'
-            );
-        }
-
-        $path = $paths[0];
-
-        $ext = substr($path, strpos($path, '.'));
-        if (in_array($ext, self::VIEW_EXT) && $this->enableCache) {
-
-        }
-
-        return $path;
+        
     }
 }
