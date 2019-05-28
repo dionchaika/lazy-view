@@ -57,7 +57,7 @@ class View
      * @param string      $dir
      * @param string|null $compiledDir
      */
-    public function __construct(string $dir, ?tring $compiledDir = null)
+    public function __construct(string $dir, ?string $compiledDir = null)
     {
         $this->dir = rtrim($dir, \DIRECTORY_SEPARATOR);
 
@@ -166,16 +166,35 @@ class View
     }
 
     /**
-     * Get a view path.
+     * Normalize a view name.
      *
      * @param string $name
      * @return string
-     * @throws \InvalidArgumentException
      */
-    protected function getPath(string $name): string
+    protected function normalizeName(string $name): string
     {
-        $name = str_replace('.', \DIRECTORY_SEPARATOR, $name);
+        return str_replace('.', \DIRECTORY_SEPARATOR, $name);
+    }
 
+    /**
+     * Get a view path.
+     *
+     * @param string $name
+     * @return string|null
+     */
+    protected function getPath(string $name): ?string
+    {
+        
+    }
+
+    /**
+     * Get a compiled view path.
+     *
+     * @param string $name
+     * @return string|null
+     */
+    protected function getCompiledPath(string $name): ?string
+    {
         
     }
 }
