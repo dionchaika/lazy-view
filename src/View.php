@@ -45,6 +45,14 @@ class View
     protected $compiledDir;
 
     /**
+     * The array
+     * of shared view parameters.
+     *
+     * @var mixed[]
+     */
+    protected $params = [];
+
+    /**
      * @param string $dir
      * @param string $compiledDir
      */
@@ -93,6 +101,7 @@ class View
         $obLevel = ob_get_level();
         ob_start();
 
+        extract($this->params);
         extract($params, \EXTR_SKIP);
 
         try {
