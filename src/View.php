@@ -145,6 +145,18 @@ class View
     public function render(string $name, array $params = []): string
     {
         $normalizedName = $this->normalizeName($name);
+
+        $compiledPath = $this->getCompiledPath($normalizedName);
+        if (null === $compiledPath) {
+            $path = $this->getPath($normalizedName);
+            if (null === $path) {
+                throw new InvalidArgumentException('View not found: '.$name.'!');
+            }
+
+            $this->compile($path);
+        }
+
+        return $this->evaluate($compiledPath, $params);
     }
 
     /**
@@ -189,7 +201,7 @@ class View
      * @param mixed[] $params
      * @return string
      */
-    protected function evaluate(string $path, array $params): string
+    protected function evaluate(string $path, array $params = []): string
     {
         $obLevel = ob_get_level();
 
