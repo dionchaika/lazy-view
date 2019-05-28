@@ -52,7 +52,7 @@ class View
         }
 
         $this->params = $params;
-        $this->compiler = $compiler ?? new Compiller;
+        $this->compiler = $compiler ?? new Compiler;
     }
 
     /**
@@ -122,6 +122,16 @@ class View
     }
 
     /**
+     * Get the views compiler.
+     *
+     * @return \Lazy\View\CompilerInterface
+     */
+    public function getCompiler(): CompilerInterface
+    {
+        return $this->compiler;
+    }
+
+    /**
      * Render a view into the HTML.
      *
      * @param string  $name
@@ -130,6 +140,8 @@ class View
      */
     public function render(string $name, array $params = []): string
     {
+        //
+
         return $this->evaluate($path, array_merge($params, $this->params));
     }
 
