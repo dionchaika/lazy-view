@@ -144,59 +144,11 @@ class View
      */
     public function render(string $name, array $params = []): string
     {
-        $normalizedName = $this->normalizeName($name);
-
-        $compiledPath = $this->getCompiledPath($normalizedName);
-        if (null === $compiledPath) {
-            $path = $this->getPath($normalizedName);
-            if (null === $path) {
-                throw new InvalidArgumentException('View not found: '.$name.'!');
-            }
-
-            $this->compile($path);
-        }
-
-        return $this->evaluate($compiledPath, $params);
+        
     }
 
     /**
-     * Get a view path.
-     *
-     * @param string $name
-     * @return string|null
-     */
-    protected function getPath(string $name): ?string
-    {
-        $paths = glob($this->dir.\DIRECTORY_SEPARATOR.$name.'.*');
-        return !empty($paths) ? $paths[0] : null;
-    }
-
-    /**
-     * Get a compiled view path.
-     *
-     * @param string $name
-     * @return string|null
-     */
-    protected function getCompiledPath(string $name): ?string
-    {
-        $path = $this->compiledDir.\DIRECTORY_SEPARATOR.$name.self::COMPILED_VIEW_EXT;
-        return file_exists($path) ? $path : null;
-    }
-
-    /**
-     * Normalize a view name.
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function normalizeName(string $name): string
-    {
-        return str_replace('.', \DIRECTORY_SEPARATOR, $name);
-    }
-
-    /**
-     * Evaluate a path
-     * and return a result.
+     * Evaluate a path.
      *
      * @param string  $path
      * @param mixed[] $params
@@ -212,7 +164,7 @@ class View
         extract($params, \EXTR_SKIP);
 
         try {
-            require $path;
+            include $path;
         } catch (Throwable $e) {
             while (ob_get_level() > $obLevel) {
                 ob_end_clean();
