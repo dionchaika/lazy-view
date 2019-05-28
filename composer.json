@@ -1,0 +1,29 @@
+{
+    "name": "lazy/view",
+    "description": "The Lazy Framework View Package",
+    "keywords": [
+        "php",
+        "lazy",
+        "view"
+    ],
+    "homepage": "https://github.com/dionchaika/lazy-view",
+    "version": "v1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dion Chaika",
+            "email": "dionchaika@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lazy\\View\\": "src/"
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.1.3"
+    }
+}
