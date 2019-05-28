@@ -144,36 +144,7 @@ class View
      */
     public function render(string $name, array $params = []): string
     {
-        $path = $this->getPath($name);
-
-        $obLevel = ob_get_level();
-        ob_start();
-
-        extract($this->params);
-        extract($params, \EXTR_SKIP);
-
-        try {
-            require $path;
-        } catch (Throwable $e) {
-            while (ob_get_level() > $obLevel) {
-                ob_end_clean();
-            }
-
-            throw $e;
-        }
-
-        return ob_get_clean();
-    }
-
-    /**
-     * Normalize a view name.
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function normalizeName(string $name): string
-    {
-        return str_replace('.', \DIRECTORY_SEPARATOR, $name);
+        
     }
 
     /**
@@ -196,5 +167,38 @@ class View
     protected function getCompiledPath(string $name): ?string
     {
         
+    }
+
+    /**
+     * Normalize a view name.
+     *
+     * @param string $name
+     * @return string
+     */
+    protected function normalizeName(string $name): string
+    {
+        return str_replace('.', \DIRECTORY_SEPARATOR, $name);
+    }
+
+    protected function evaluate(string $path, array $params): string
+    {
+        $obLevel = ob_get_level();
+
+        ob_start();
+
+        extract($this->params);
+        extract($params, \EXTR_SKIP);
+
+        try {
+            require $path;
+        } catch (Throwable $e) {
+            while (ob_get_level() > $obLevel) {
+                ob_end_clean();
+            }
+
+            throw $e;
+        }
+
+        return ob_get_clean();
     }
 }
