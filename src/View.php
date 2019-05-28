@@ -81,10 +81,10 @@ class View
      * Render a view into the HTML.
      *
      * @param string  $name
-     * @param mixed[] $parameters
+     * @param mixed[] $params
      * @return string
      */
-    public function render(string $name, array $parameters = []): string
+    public function render(string $name, array $params = []): string
     {
         
     }
