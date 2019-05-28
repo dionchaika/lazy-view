@@ -144,10 +144,6 @@ class View
      */
     public function render(string $name, array $params = []): string
     {
-        //
-        // Getting a view path...
-        //
-
         return $this->evaluate($path, array_merge($params, $this->params));
     }
 
