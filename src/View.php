@@ -53,10 +53,10 @@ class View
     protected $params = [];
 
     /**
-     * @param string $dir
-     * @param string $compiledDir
+     * @param string      $dir
+     * @param string|null $compiledDir
      */
-    public function __construct(string $dir, string $compiledDir = null)
+    public function __construct(string $dir, ?tring $compiledDir = null)
     {
         $this->dir = rtrim($dir, \DIRECTORY_SEPARATOR);
 
@@ -85,6 +85,52 @@ class View
     public function getCompiledDir(): string
     {
         return $this->compiledDir;
+    }
+
+    /**
+     * Get the array
+     * of shared view parameters.
+     *
+     * @return mixed[]
+     */
+    public function getParams(): array
+    {
+        return $this->params;
+    }
+
+    /**
+     * Is the shared view parameter exists.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function hasParam(string $name): bool
+    {
+        return isset($this->params[$name]);
+    }
+
+    /**
+     * Get the shared view parameter.
+     *
+     * @param string $name
+     * @return mixed|null
+     */
+    public function getParam(string $name)
+    {
+        return $this->hasParam($name) ? $this->params[$name] : null;
+    }
+
+    /**
+     * Set a shared view parameter.
+     *
+     * @param string $name
+     * @param mixed  $value
+     * @return self
+     */
+    public function setParam(string $name, $value): self
+    {
+        $this->params[$name] = $value;
+        return $this;
     }
 
     /**
@@ -125,6 +171,6 @@ class View
      */
     protected function getPath(string $name): string
     {
-
+        
     }
 }
