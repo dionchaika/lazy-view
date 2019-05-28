@@ -99,7 +99,7 @@ class View
     }
 
     /**
-     * Is the shared view parameter exists.
+     * Is a shared view parameter exists.
      *
      * @param string $name
      * @return bool
@@ -110,7 +110,7 @@ class View
     }
 
     /**
-     * Get the shared view parameter.
+     * Get a shared view parameter.
      *
      * @param string $name
      * @return mixed|null
@@ -171,6 +171,6 @@ class View
      */
     protected function getPath(string $name): string
     {
-        
+
     }
 }
