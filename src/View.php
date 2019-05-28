@@ -155,7 +155,10 @@ class View
      */
     protected function getPath(string $name): ?string
     {
-        
+        $name = $this->normalizeName($name);
+        $paths = glob($this->dir.\DIRECTORY_SEPARATOR.$name.'.*');
+
+        return !empty($paths) ? $paths[0] : null;
     }
 
     /**
@@ -166,7 +169,10 @@ class View
      */
     protected function getCompiledPath(string $name): ?string
     {
-        
+        $name = $this->normalizeName($name);
+        $path = $this->compiledDir.\DIRECTORY_SEPARATOR.$name.self::COMPILED_VIEW_EXT;
+
+        return file_exists($path) ? $path : null;
     }
 
     /**
