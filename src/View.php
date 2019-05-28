@@ -194,11 +194,11 @@ class View
             );
         }
 
-        $path = array_shift($paths);
+        $path = $paths[0];
 
         $ext = substr($path, strpos($path, '.'));
         if (in_array($ext, self::VIEW_EXT) && $this->enableCache) {
-            
+
         }
 
         return $path;
