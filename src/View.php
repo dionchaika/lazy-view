@@ -100,8 +100,9 @@ class View
         } catch (Throwable $e) {
             while (ob_get_level() > $obLevel) {
                 ob_end_clean();
-                throw $e;
             }
+
+            throw $e;
         }
 
         return ob_get_clean();
