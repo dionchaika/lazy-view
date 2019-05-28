@@ -180,6 +180,13 @@ class View
         return str_replace('.', \DIRECTORY_SEPARATOR, $name);
     }
 
+    /**
+     * Evaluate path.
+     *
+     * @param string  $path
+     * @param mixed[] $params
+     * @return string
+     */
     protected function evaluate(string $path, array $params): string
     {
         $obLevel = ob_get_level();
