@@ -77,5 +77,15 @@ class View
         return $this->compiledDir;
     }
 
-    
+    /**
+     * Render a view into the HTML.
+     *
+     * @param string  $name
+     * @param mixed[] $parameters
+     * @return string
+     */
+    public function render(string $name, array $parameters = []): string
+    {
+        
+    }
 }
