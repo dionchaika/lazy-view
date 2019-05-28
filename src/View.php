@@ -161,7 +161,7 @@ class View
         ob_start();
 
         extract($this->params);
-        extract($params, \EXTR_SKIP);
+        extract($params, \EXTR_OVERWRITE);
 
         try {
             include $path;
